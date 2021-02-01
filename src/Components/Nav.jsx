@@ -10,9 +10,10 @@ function Nav() {
 
     return (
         <nav>
+            {/* Show user image if logged in else app logo */}
             <img className="avatar" src="https://i.pravatar.cc/300" alt="avatar"/>
-            <HamMenu toggleSideMenu={setIsActive} />
-            {isActive && <SideMenu />}
+            <HamMenu toggleSideMenu={setIsActive} isActive={isActive} />
+            <SideMenu isActive={isActive} />
         </nav>
     )
 }
