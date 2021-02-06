@@ -1,4 +1,5 @@
 import React from 'react'
+import ThemeChooser from './ThemeChooser'
 
 function SideMenu({ isActive }) {
     return (
@@ -7,6 +8,7 @@ function SideMenu({ isActive }) {
             "sidemenu active" :
             "sidemenu"
         }>
+            <ThemeChooser />
             <div className="nav-links">
                 {/* Todo: Show only when user logged in */}
                 <div className="nav-link">Projects</div>
