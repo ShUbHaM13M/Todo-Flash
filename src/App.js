@@ -1,6 +1,5 @@
-import './App.css';
+import './css/App.css';
 import Nav from './Components/Nav'
-import UserAuth from './Pages/UserAuth';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import routes from './Config/routes'
 import AppRoutes from './Components/AppRoute';

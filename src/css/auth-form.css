@@ -1,7 +1,8 @@
 .auth-form {
     height: 70vh;
+    margin: auto;
     margin-top: 2em;
-    width: 40%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     font-size: 1.2rem;
@@ -79,4 +80,10 @@
             opacity var(--animation-speed) ease-out var(--animation-delay),
             visibility var(--animation-speed) ease-out var(--animation-delay),
             margin var(--animation-speed) ease-out
+}
+
+@media screen and (max-width: 650px) {
+    .auth-form {
+        width: 100%;
+    }
 }

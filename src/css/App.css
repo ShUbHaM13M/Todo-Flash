@@ -10,10 +10,13 @@
   --blue: #0091AD;
   --yellow: #FDFF96; 
   --input-border: 2px;
+  --body-padding: 1em 22%;
+  --body-padding-mobile: 1em 10%;
 }
 
 body {
   height: 100vh;
+  padding: var(--body-padding);
   /* background: black; */
   overflow: hidden;
 }
@@ -43,11 +46,15 @@ body {
 }
 
 .cus-input input {
-  width: 100%;
+  width: 90%;
   padding: 0.5em;
   border: none;
   outline: none;
   font-size: 0.9rem;
+}
+
+input:-moz-placeholder, input:invalid {
+  box-shadow:none !important;
 }
 
 .cus-input:focus-within img {
@@ -82,12 +89,27 @@ body {
   transform: scale(0.95)
 }
 
+a.btn {
+  text-decoration: none;
+  padding: 0.5em 1em;
+}
+
 .btn.google {
   color: black;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
    0 3px 1px -2px rgba(0, 0, 0, 0.12),
     0 1px 5px 0 rgba(0, 0, 0, 0.2);
 } 
+
+@media screen and (max-width: 700px) {
+  body {
+    padding: var(--body-padding-mobile)
+  }
+  .cus-input {
+    min-width: 50%;
+    overflow: hidden
+  }
+}
 
 @keyframes pulse {
   0% { transform: scale(.8); }

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import HamMenu from './HamMenu'
 import SideMenu from './SideMenu'
 import '../css/nav.css'
+import AvatarIcon from './AvatarIcon'
 
 function Nav() {
 
@@ -12,7 +13,7 @@ function Nav() {
     return (
         <nav>
             {/* Show user image if logged in else app logo */}
-            <img className="avatar" src="https://i.pravatar.cc/300" alt="avatar"/>
+            <AvatarIcon />
             <HamMenu toggleSideMenu={setIsActive} isActive={isActive} />
             <SideMenu isActive={isActive} />
         </nav>
