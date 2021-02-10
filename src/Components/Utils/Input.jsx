@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 
-function Input({img, type, onChange, name, isVisible}) {
+function Input({img, type, onChange, name, refer ,isVisible, placeholder}) {
 
     const thisInput = useRef(null);
 
@@ -14,8 +14,9 @@ function Input({img, type, onChange, name, isVisible}) {
     return (
         <div className="cus-input" ref={thisInput}>
             {img && <img src={img} alt='' />}
-            <input type={type} onChange={onChange} 
-                name={name} placeholder={name} 
+            <input type={type} onChange={onChange}
+                ref={refer} 
+                name={name} placeholder={placeholder} 
                 autoComplete='new-password'  />
         </div>
     )

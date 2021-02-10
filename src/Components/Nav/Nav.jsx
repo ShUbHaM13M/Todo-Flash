@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import HamMenu from './HamMenu'
 import SideMenu from './SideMenu'
-import '../css/nav.css'
+import './nav.css'
 import AvatarIcon from './AvatarIcon'
 
 function Nav() {

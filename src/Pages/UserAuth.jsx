@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import LoginTab from '../Components/loginTab'
-import SignupTab from '../Components/signupTab'
+import LoginTab from '../Components/auth/loginTab'
+import SignupTab from '../Components/auth/signupTab'
 import '../css/auth-form.css'
 
 function UserAuth() {

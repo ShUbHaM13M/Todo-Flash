@@ -1,17 +1,17 @@
 import React from 'react'
 import HomeContent from '../Components/HomeContent'
-import Projects from '../Components/Projects'
+import ProjectContainer from '../Components/Project/ProjectContainer'
 
 function Home() {
     //useSelector()
-    const isLoggedIn = true 
+    const isLoggedIn = false 
 
     return (
         //dynamically change content based on login
         <div>
             {isLoggedIn === false ?
             <HomeContent /> :
-            <Projects />}
+            <ProjectContainer />}
         </div>
     )
 }

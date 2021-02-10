@@ -1,9 +1,8 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 
 function AvatarIcon() {
 
-    const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+    const isLoggedIn = false;
 
     return (
         <div>

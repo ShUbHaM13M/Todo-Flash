@@ -1,0 +1,31 @@
+.project-container {
+    margin: auto;
+    margin-top: 2em;
+    display: grid;
+    max-width: 35em;
+    grid-template-columns: repeat(auto-fill, minmax(10em, 2fr));
+    grid-template-rows: repeat(auto-fill, minmax(10em, 1fr));
+    gap: 1em;
+}
+
+.project-container .project {
+    min-height: 10em;
+    border-radius: 5px;
+}
+
+.project-container .fab-add {
+    position: fixed;
+    top: 80%;
+    right: 23%;
+    background: var(--blue);
+    border-radius: 50%;
+    height: 3em;
+    width: 3em;
+    cursor: pointer;
+    display: flex;
+}
+
+.fab-add .add-icon {
+    margin: auto;
+    color: #fff;
+}
