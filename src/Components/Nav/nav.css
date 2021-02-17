@@ -1,8 +1,10 @@
 nav {
     display: flex;
     justify-content: space-between;
-    background: white;
+    background: transparent;
     min-height: 6em;
+    max-width: 70vw;
+    margin: 0 auto;
     align-items: center;
     z-index: 10;
 }
@@ -12,7 +14,7 @@ nav {
     height: 3em;
     border-radius: 50%;
     cursor: pointer;
-    border: 1px solid black;
+    border: 1px solid var(--border-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,7 +51,7 @@ nav {
     height: 5px;
     width: 100%;
     transform: translateY(-50%);
-    transition: right 50ms ease, opacity 100ms ease
+    transition: opacity 100ms ease
 }
 
 .three {
@@ -58,7 +60,6 @@ nav {
 }
 
 .ham-menu.active .line.two {
-    right: -100%;
     opacity: 0;
 }
 
@@ -72,11 +73,12 @@ nav {
     transform: rotateZ(-45deg)
 }
 
+/* figure out animation not working  */
 .sidemenu {
     position: absolute;
     right: -100%;
     top: 0;
-    min-height: 100%;
+    height: 100vh;
     background: rgb(0, 0, 0, 0.7);
     backdrop-filter: blur(1px);
     min-width: 85%;
@@ -93,6 +95,9 @@ nav {
     right: 0;
 }
 
+.sidemenu.disabled {
+    display: none;
+}
 .nav-links {
     height: 50vh;
     width: 50%;
@@ -110,6 +115,20 @@ nav {
     font-size: 1.05rem;
     padding: 0.5em 1em;
     border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: transform ease;
+    transition-duration: var(--animation-duration);
+}
+
+.nav-link:hover {
+    transform: scale(1.1)
+}
+
+.nav-link a {
+    color: var(--text);
+    text-decoration: none;
 }
 
 .theme-chooser {
@@ -147,20 +166,40 @@ nav {
     border: 1px solid #fff;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 575.98px) {
     nav {
-        justify-content: space-between
+        justify-content: space-between;
+        min-width: 85vw;
     }
     .avatar {
-        max-width: 4em
+        width: 4rem;
+        height: 4rem;
     }
     .nav-links{
-        width:70%;
+        width:90%;
         height:60vh;
     }
     .nav-link {
         width:60%;
-        padding: 1em 1.5em;
+        padding: 0.8em 1.5em;
         font-size: 1.5rem;
+    }
+    .theme {
+        width: 3em;
+        height: 3em
+    }
+    .theme.active {
+        width: 4.4em;
+        height: 4.4em
+    }
+    .ham-menu {
+        width: 3em;
+        height: 3em
+    }
+    .line {
+        height: 5px
+    }
+    .line .two {
+        height: 6px;
     }
 }

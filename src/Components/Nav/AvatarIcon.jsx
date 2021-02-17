@@ -1,14 +1,15 @@
 import React from 'react'
+import { useAuth } from '../../context/AuthContext'
 
 function AvatarIcon() {
 
-    const isLoggedIn = false;
+    const { currentUser } = useAuth();
 
     return (
         <div>
-            {isLoggedIn === false ?
-            <div className="avatar">T</div> :
-            <img className="avatar" src="https://i.pravatar.cc/300" alt="avatar"/>}
+            { currentUser ?
+            <img className="avatar" src={currentUser.photoURL} alt={currentUser.email[0]}/> :
+            <div className="avatar">T</div> }
         </div>
     )
 }

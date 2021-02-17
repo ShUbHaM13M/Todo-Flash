@@ -7,31 +7,44 @@ export function useAuth() {
     return useContext(AuthContext)
 }
 
-export function signInWithEmail(email, password) {
+function signInWithEmail(email, password) {
     return auth.createUserWithEmailAndPassword(email, password)
 }
 
-export function signInWithGoogle() {
-    auth.signInWithPopup(googleProvider).then(res => {
-        console.log(res)
-    }).catch(err => {
-        console.log(err)
-    })
+function loginWithEmail(email, password) {
+    return auth.signInWithEmailAndPassword(email, password)
+}
+
+function logout() {
+    return auth.signOut()
+}
+
+function resetPassword (email) {
+    return auth.sendPasswordResetEmail(email) 
+}
+
+function signInWithGoogle() {
+    auth.signInWithPopup(googleProvider)
 }
 
 export function AuthProvider ({ children }) {
 
     const [ currentUser, setCurrentUser ] = useState()
+    const [ loading, setLoading ] = useState(true)
 
     const value = {
         currentUser,
         signInWithEmail,
-        signInWithGoogle
+        signInWithGoogle,
+        logout,
+        loginWithEmail,
+        resetPassword
     }
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user)
+            setLoading(false)
         })
 
         return unsubscribe
@@ -40,7 +53,7 @@ export function AuthProvider ({ children }) {
 
     return (
         <AuthContext.Provider value={value}>
-            {children}
+            {!loading && children}
         </AuthContext.Provider>
     )
 }

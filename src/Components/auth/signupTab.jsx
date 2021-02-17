@@ -3,6 +3,7 @@ import Input from '../Utils/Input';
 import mailImg from '../../images/mail.svg'
 import passwordImg from '../../images/password.svg'
 import { useAuth } from '../../context/AuthContext'
+import { useHistory } from 'react-router-dom';
 
 function SignupTab  ({ currentTab }) {
 
@@ -11,16 +12,29 @@ function SignupTab  ({ currentTab }) {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const conPasswordRef = useRef(null);
+
     const [ error, setError ] = useState('');
+    const [ loading, setLoading ] = useState(false)
+
     const { signInWithEmail } = useAuth();
 
+    const history = useHistory()
 
-    function handleOnSubmit (e) {
+    async function handleOnSubmit (e) {
         e.preventDefault();
-
+        if (passwordRef.current.value === '' || emailRef.current.value === '') return;
         if (passwordRef.current.value !== conPasswordRef.current.value) return;
 
-        signInWithEmail(emailRef.current.value, passwordRef.current.value)
+        try {
+            setLoading(true)
+            setError('')
+            await signInWithEmail(emailRef.current.value, passwordRef.current.value)
+            setLoading(false)
+            history.push('/')
+        } catch {
+            setLoading(false)
+            setError('Failed to create an account')
+        }
     }
 
     return (
@@ -50,7 +64,7 @@ function SignupTab  ({ currentTab }) {
                 placeholder='confirm password'
                 refer={conPasswordRef} />
 
-            <button className='btn primary' onClick={e => handleOnSubmit(e)} >Sign Up</button>
+            <button disabled={loading} className='btn primary' onClick={e => handleOnSubmit(e)} >Sign Up</button>
         </div>
     );
 };

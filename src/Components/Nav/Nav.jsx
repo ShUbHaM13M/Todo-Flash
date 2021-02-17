@@ -8,14 +8,11 @@ function Nav() {
 
     const [ isActive, setIsActive ] = useState(false)
 
-    //Get avatar img from server or the first initial of the name
-
     return (
         <nav>
-            {/* Show user image if logged in else app logo */}
             <AvatarIcon />
             <HamMenu toggleSideMenu={setIsActive} isActive={isActive} />
-            <SideMenu isActive={isActive} />
+            <SideMenu isActive={isActive} setIsActive={setIsActive} />
         </nav>
     )
 }

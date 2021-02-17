@@ -1,18 +1,20 @@
 import React from 'react'
-import HomeContent from '../Components/HomeContent'
-import ProjectContainer from '../Components/Project/ProjectContainer'
+import { Link } from 'react-router-dom'
+import '../css/Home.css'
+import { useAuth } from '../context/AuthContext'
 
 function Home() {
-    //useSelector()
-    const isLoggedIn = false 
+
+    const { currentUser } = useAuth();
 
     return (
-        //dynamically change content based on login
-        <div>
-            {isLoggedIn === false ?
-            <HomeContent /> :
-            <ProjectContainer />}
-        </div>
+        <main>
+            <h2>TodoFlash helps you to manage and keep track of ongoing projects</h2>
+            {currentUser ? 
+                <Link className="btn primary" to="/projects">Browse Projects</Link>:
+                <Link className="btn primary" to="/auth">Get Started</Link>
+            }
+        </main>
     )
 }
 

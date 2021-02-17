@@ -1,11 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import LoginTab from '../Components/auth/loginTab'
 import SignupTab from '../Components/auth/signupTab'
 import '../css/auth-form.css'
+import { useAuth } from '../context/AuthContext'
+import { useHistory } from 'react-router-dom'
 
 function UserAuth() {
 
     const [currentTab, setCurrentTab] = useState('login')
+
+    const history = useHistory()
+    const { currentUser } = useAuth()
+
+    useEffect(() => {
+        if (currentUser) {
+            history.push('/projects')
+        }
+    }, [currentUser, history])
 
     return (
         <div className="auth-form">

@@ -1,30 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Input from '../Utils/Input';
 import mailImg from '../../images/mail.svg'
 import passwordImg from '../../images/password.svg'
 import { useAuth } from '../../context/AuthContext'
+import { useHistory } from 'react-router-dom';
 
 const LoginTab = ({ currentTab }) => {
 
     let isActive = currentTab === 'login' ? true : false;
 
-    const [ email, setEmail ] = useState('');
-    const [ password, setPassword ] = useState('');
+    const emailRef = useRef(null);
+    const passwordRef = useRef(null);
+
     const [ error, setError ] = useState('');
-    const { signInWithGoogle } = useAuth(); 
+    const [ loading, setLoading ] = useState(false); 
 
-    const handleOnChange = e => {
-        const {name, value} = e.currentTarget;
+    const { signInWithGoogle, loginWithEmail } = useAuth(); 
 
-          if(name === 'loginEmail') setEmail(value);
-          else if(name === 'loginPassword') setPassword(value);
-          
+    const history = useHistory()
+
+    const handleLogin = async (e) => {
+        setLoading(true)
+        setError('')
+        e.preventDefault();
+
+        if (passwordRef.current.value === '' || emailRef.current.value === '') return;
+
+        try {
+            await loginWithEmail(emailRef.current.value, passwordRef.current.value)
+            setLoading(false)
+            history.push('/projects')
+        } catch (err) {
+            setLoading(false)
+            if (err.code === 'auth/user-not-found') {
+                setError('User not Found')
+            } else if (err.code === 'auth/wrong-password') {
+                setError('Incorrect Password')
+            }
+        }
     }
 
-    const handleOnSubmit = (e) => {
-        e.preventDefault();
-        setEmail('');
-        setPassword('');
+    const handleGoogleSignIn = async () => {
+        setLoading(true);
+        setError('')
+        try {
+            await signInWithGoogle();
+            history.push('/projects')
+        } catch {
+            
+        }
+        setLoading(false)
     }
 
     return (
@@ -36,27 +61,26 @@ const LoginTab = ({ currentTab }) => {
                 img={mailImg} 
                 type='email' 
                 name='loginEmail'
-                value={email}
                 isVisible={isActive} 
-                onChange={e => handleOnChange(e)}
                 placeholder='pokemon@email.com'
+                refer={emailRef}
                 />
             <Input 
                 img={passwordImg} 
                 type='password' 
-                value={password}
                 name='loginPassword' 
                 isVisible={isActive}
+                refer={passwordRef}
                 placeholder='password'
-                onChange={e => handleOnChange(e)} 
                 />
 
-            <button className="btn primary" onClick={e => handleOnSubmit(e)} >
+            <button disabled={loading} className="btn primary" onClick={handleLogin} >
                 Login
             </button><hr />
             <button 
+                disabled={loading}
                 className="btn google" 
-                onClick={e => {e.preventDefault(); signInWithGoogle()}}
+                onClick={handleGoogleSignIn}
             >
                 Sign in with Google
             </button>
