@@ -44,12 +44,12 @@ const LoginTab = ({ currentTab }) => {
         setLoading(true);
         setError('')
         try {
-            await signInWithGoogle();
+            await signInWithGoogle()
+            setLoading(false)
             history.push('/projects')
-        } catch {
-            
+        } catch (err) {
+            console.error(err)
         }
-        setLoading(false)
     }
 
     return (

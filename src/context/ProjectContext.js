@@ -18,8 +18,16 @@ export default function ProjectProvider({ children }) {
 
     const { currentUser } = useAuth()
 
+    const projectRef = db.collection('projects')
+
+    function addNewProject (project) {
+        projectRef.add({...project})
+            .then(doc => (doc))
+            .catch(error => console.log(error))
+    }
+
     useEffect( () => {
-        const unsubscriber = db.collection('projects').where('user_id', '==', currentUser.uid)
+        const unsubscriber = projectRef.where("user_id", "==", currentUser.uid)
             .onSnapshot(snapshot => {
                 setData({
                     error: false,
@@ -40,10 +48,11 @@ export default function ProjectProvider({ children }) {
 
         return unsubscriber
 
-    }, [currentUser.uid])
+    }, [currentUser.uid, projectRef])
 
     const value = {
         data,
+        addNewProject
     }
 
     return (

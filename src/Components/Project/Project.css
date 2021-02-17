@@ -161,6 +161,20 @@
     min-width: 10em
 }
 
+.color.cyan {
+    background-color: #30BCED;
+}
+
+.color.purple {
+    background-color: #2B193D;
+}
+
+.color.magnolia { background-color: #303030 }
+
+.color.orange { background-color: #FC5130 }
+
+.color.saffron { background-color: #F9A03F }
+
 @media screen and (max-width: 575.98px) {
     .project-container .fab-add {
         position: fixed;
